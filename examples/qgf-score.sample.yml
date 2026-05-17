@@ -1,0 +1,84 @@
+qgf_score:
+  version: "0.1"
+  question_id: "qgf-example-001"
+  question_text: "Can a question bend the structure of civilization?"
+  language: "en"
+  status: "sample"
+
+  formula:
+    gravity_value: "G = ((S * D * I * C)^alpha) / (T^beta * N^gamma)"
+    qgf_score: "QGF = log(1 + G)"
+    log_base: "natural"
+
+  parameters:
+    S_source_strength: 0.90
+    D_depth: 0.95
+    I_influence: 0.85
+    C_coherence: 0.92
+    T_temporal_distance: 1.20
+    N_noise_level: 1.10
+    alpha_resonance_exponent: 1.40
+    beta_temporal_decay: 0.80
+    gamma_noise_sensitivity: 0.70
+
+  result:
+    gravity_value: 0.460174
+    qgf_score: 0.378556
+    field_class: "Weak Field"
+
+  interpretation:
+    summary: "This sample demonstrates the minimal structure of a QGF Score object."
+    note: "The numeric values are illustrative and should not be treated as a final judgment."
+
+  evidence:
+    trace_records:
+      - id: "trace-example-001"
+        type: "trace_protocol_reference"
+        description: "Example trace record connected to the origin question."
+
+    structure_fingerprints:
+      - id: "fingerprint-example-001"
+        type: "structure_fingerprint_reference"
+        description: "Example structural fingerprint derived from the question."
+
+    related_outputs:
+      - id: "output-example-001"
+        type: "github_specification"
+        title: "QGF Score Specification v0.1"
+      - id: "output-example-002"
+        type: "article"
+        title: "Question Gravitational Field"
+      - id: "output-example-003"
+        type: "gpt_implementation"
+        title: "Question Gravity Analyzer"
+
+  relationships:
+    upstream:
+      - "question_origin"
+      - "trace_protocol"
+
+    downstream:
+      - "structure_fingerprint"
+      - "lineage_relation"
+      - "tolerance_band"
+      - "allocation_readiness"
+      - "royalty_os"
+
+  limitations:
+    - "This score is an estimate."
+    - "This score does not determine legal authorship."
+    - "This score does not prove originality by itself."
+    - "This score should not be used as an automatic monetary allocation rule."
+    - "This score should be interpreted with human or multi-agent review."
+
+  non_goals:
+    - "copyright_determination"
+    - "legal_authorship_proof"
+    - "automatic_reward_allocation"
+    - "creator_ranking"
+    - "absolute_originality_claim"
+
+  metadata:
+    created_by: "Kazene / QGF Score Specification"
+    specification_version: "0.1"
+    license_note: "For demonstration purposes only."
