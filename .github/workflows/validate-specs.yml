@@ -1,0 +1,192 @@
+name: Validate QGF Specifications
+
+on:
+  push:
+    paths:
+      - "schemas/**"
+      - "examples/**"
+      - ".github/workflows/validate-specs.yml"
+  pull_request:
+    paths:
+      - "schemas/**"
+      - "examples/**"
+      - ".github/workflows/validate-specs.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-qgf-specs:
+    name: Validate QGF schema and examples
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Show repository tree
+        run: |
+          echo "=== Repository files ==="
+          find . -maxdepth 4 -type f | sort
+
+      - name: Install validation dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install jsonschema PyYAML
+
+      - name: Validate QGF examples
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          import math
+          import sys
+          from pathlib import Path
+
+          import yaml
+          from jsonschema import Draft202012Validator
+
+          print("=== Validating QGF Score Specification v0.1 ===")
+
+          schema_path = Path("schemas/qgf-score-v0.1.schema.json")
+          example_paths = [
+              Path("examples/qgf-score.sample.yml"),
+              Path("examples/qgf-score.resonant.sample.yml"),
+          ]
+
+          failed = False
+
+          if not schema_path.exists():
+              print(f"ERROR: Missing schema file: {schema_path}")
+              sys.exit(1)
+
+          for path in example_paths:
+              if not path.exists():
+                  print(f"ERROR: Missing example file: {path}")
+                  failed = True
+
+          if failed:
+              sys.exit(1)
+
+          with schema_path.open("r", encoding="utf-8") as f:
+              schema = json.load(f)
+
+          try:
+              Draft202012Validator.check_schema(schema)
+              print(f"OK: Schema is valid JSON Schema Draft 2020-12: {schema_path}")
+          except Exception as e:
+              print(f"ERROR: Invalid JSON Schema: {schema_path}")
+              print(e)
+              sys.exit(1)
+
+          validator = Draft202012Validator(schema)
+
+          def error_path(error):
+              if not error.absolute_path:
+                  return "$"
+              return "$." + ".".join(str(p) for p in error.absolute_path)
+
+          def compute_raw_gravity(parameters):
+              s = parameters["S_source_strength"]
+              d = parameters["D_depth"]
+              i = parameters["I_influence"]
+              c = parameters["C_coherence"]
+              t = parameters["T_temporal_distance"]
+              n = parameters["N_noise_level"]
+              alpha = parameters["alpha_resonance_exponent"]
+              beta = parameters["beta_temporal_decay"]
+              gamma = parameters["gamma_noise_sensitivity"]
+
+              return ((s * d * i * c) ** alpha) / ((t ** beta) * (n ** gamma))
+
+          def almost_equal(a, b, tolerance=0.00001):
+              return abs(a - b) <= tolerance
+
+          for example_path in example_paths:
+              print("")
+              print(f"=== Checking {example_path} ===")
+
+              with example_path.open("r", encoding="utf-8") as f:
+                  data = yaml.safe_load(f)
+
+              errors = sorted(
+                  validator.iter_errors(data),
+                  key=lambda e: list(e.absolute_path)
+              )
+
+              if errors:
+                  print(f"ERROR: Schema validation failed for {example_path}")
+                  for error in errors:
+                      print(f"- {error_path(error)}: {error.message}")
+                  failed = True
+                  continue
+
+              print("OK: Schema validation passed.")
+
+              qgf = data["qgf_score"]
+              parameters = qgf["parameters"]
+              result = qgf["result"]
+
+              raw_gravity = compute_raw_gravity(parameters)
+
+              if "raw_gravity_value" in result:
+                  declared_raw = result["raw_gravity_value"]
+                  if almost_equal(raw_gravity, declared_raw):
+                      print(f"OK: raw_gravity_value matches formula: {declared_raw}")
+                  else:
+                      print("ERROR: raw_gravity_value does not match formula.")
+                      print(f"  computed: {raw_gravity:.6f}")
+                      print(f"  declared: {declared_raw:.6f}")
+                      failed = True
+
+              if "gravity_value" in result:
+                  declared_gravity = result["gravity_value"]
+                  if almost_equal(raw_gravity, declared_gravity):
+                      print(f"OK: gravity_value matches formula: {declared_gravity}")
+                  else:
+                      print("ERROR: gravity_value does not match formula.")
+                      print(f"  computed: {raw_gravity:.6f}")
+                      print(f"  declared: {declared_gravity:.6f}")
+                      failed = True
+
+              if "calibrated_gravity_value" in result:
+                  calibration = qgf.get("calibration", {})
+                  k = calibration.get("calibration_factor_K")
+                  if k is None:
+                      print("ERROR: calibrated_gravity_value exists but calibration_factor_K is missing.")
+                      failed = True
+                  else:
+                      computed_calibrated = raw_gravity * k
+                      declared_calibrated = result["calibrated_gravity_value"]
+                      if almost_equal(computed_calibrated, declared_calibrated):
+                          print(f"OK: calibrated_gravity_value matches raw_gravity_value * K: {declared_calibrated}")
+                      else:
+                          print("ERROR: calibrated_gravity_value does not match raw_gravity_value * K.")
+                          print(f"  computed: {computed_calibrated:.6f}")
+                          print(f"  declared: {declared_calibrated:.6f}")
+                          failed = True
+
+              gravity_for_qgf = result.get(
+                  "calibrated_gravity_value",
+                  result.get("gravity_value", result.get("raw_gravity_value"))
+              )
+
+              computed_qgf = math.log(1 + gravity_for_qgf)
+              declared_qgf = result["qgf_score"]
+
+              if almost_equal(computed_qgf, declared_qgf):
+                  print(f"OK: qgf_score matches log(1 + gravity): {declared_qgf}")
+              else:
+                  print("ERROR: qgf_score does not match log(1 + gravity).")
+                  print(f"  computed: {computed_qgf:.6f}")
+                  print(f"  declared: {declared_qgf:.6f}")
+                  failed = True
+
+          print("")
+          if failed:
+              print("Validation failed.")
+              sys.exit(1)
+
+          print("All QGF specification files are valid.")
+          PY
