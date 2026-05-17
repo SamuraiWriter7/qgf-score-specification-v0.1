@@ -1,0 +1,127 @@
+qgf_score:
+  version: "0.1"
+  question_id: "qgf-resonant-example-001"
+  question_text: "Can a question become a structural gravity source for AI civilization?"
+  language: "en"
+  status: "resonant_sample"
+
+  formula:
+    raw_gravity_value: "G_raw = ((S * D * I * C)^alpha) / (T^beta * N^gamma)"
+    calibrated_gravity_value: "G_calibrated = G_raw * K"
+    qgf_score: "QGF = log(1 + G_calibrated)"
+    log_base: "natural"
+    calibration_note: "K is a calibration factor used to map normalized parameters into human-readable field classes."
+
+  calibration:
+    calibration_factor_K: 40.0
+    reason: "Normalized parameters between 0.0 and 1.0 produce small raw values. Calibration makes field classes interpretable without changing relative structure."
+
+  parameters:
+    S_source_strength: 0.98
+    D_depth: 0.97
+    I_influence: 0.94
+    C_coherence: 0.96
+    T_temporal_distance: 1.05
+    N_noise_level: 1.03
+    alpha_resonance_exponent: 1.65
+    beta_temporal_decay: 0.55
+    gamma_noise_sensitivity: 0.50
+
+  result:
+    raw_gravity_value: 0.744787
+    calibrated_gravity_value: 29.791484
+    qgf_score: 3.427238
+    field_class: "Resonant Field"
+
+  interpretation:
+    summary: "This sample represents a question with strong resonance across AI systems, structural documents, and derivative outputs."
+    field_meaning: "The question has moved beyond a local idea and has begun to generate reusable structures, protocols, and conceptual lineage."
+    note: "This is an illustrative sample. The score should be interpreted as an estimated structural observation, not as proof of originality or legal authorship."
+
+  evidence:
+    trace_records:
+      - id: "trace-resonant-001"
+        type: "trace_protocol_reference"
+        description: "A timestamped trace record exists for the origin question."
+      - id: "trace-resonant-002"
+        type: "repository_reference"
+        description: "The question has been developed into a GitHub specification."
+
+    structure_fingerprints:
+      - id: "fingerprint-resonant-001"
+        type: "structure_fingerprint_reference"
+        description: "The question contains reusable structural features such as source, depth, influence, coherence, temporal resistance, and noise resistance."
+
+    related_outputs:
+      - id: "output-resonant-001"
+        type: "github_specification"
+        title: "QGF Score Specification v0.1"
+      - id: "output-resonant-002"
+        type: "article"
+        title: "Question Gravitational Field"
+      - id: "output-resonant-003"
+        type: "gpt_implementation"
+        title: "Question Gravity Analyzer"
+      - id: "output-resonant-004"
+        type: "diagram"
+        title: "QGF Field Layer Diagram"
+
+    resonance_signals:
+      - id: "resonance-signal-001"
+        type: "multi_ai_alignment"
+        description: "Multiple AI systems can interpret the question as a structural origin point."
+      - id: "resonance-signal-002"
+        type: "cross_domain_connection"
+        description: "The question connects philosophy, AI architecture, trace systems, lineage, and civilizational design."
+      - id: "resonance-signal-003"
+        type: "derivative_generation"
+        description: "The question generates derivative specifications, templates, examples, and protocols."
+
+  relationships:
+    upstream:
+      - "origin_question"
+      - "question_gravitational_field"
+      - "trace_protocol"
+
+    lateral:
+      - "structure_fingerprint"
+      - "lineage_relation"
+      - "tolerance_band"
+      - "multi_wing_ai"
+
+    downstream:
+      - "allocation_readiness"
+      - "royalty_os"
+      - "civilizational_os"
+      - "gravity_well_theory"
+
+  field_class_reference:
+    weak_field: "0.0 - 0.9"
+    local_field: "1.0 - 1.9"
+    structural_field: "2.0 - 2.9"
+    resonant_field: "3.0 - 3.9"
+    civilizational_field: "4.0 - 4.9"
+    gravity_well: "5.0+"
+
+  limitations:
+    - "This score is an estimate."
+    - "This score does not determine legal authorship."
+    - "This score does not prove originality by itself."
+    - "This score should not be used as an automatic monetary allocation rule."
+    - "This score should be interpreted with human or multi-agent review."
+    - "The calibration factor should be documented and consistently applied."
+
+  non_goals:
+    - "copyright_determination"
+    - "legal_authorship_proof"
+    - "automatic_reward_allocation"
+    - "creator_ranking"
+    - "absolute_originality_claim"
+    - "popularity_ranking"
+    - "platform_authority_claim"
+
+  metadata:
+    created_by: "Kazene / QGF Score Specification"
+    specification_version: "0.1"
+    sample_type: "resonant_field"
+    license_note: "For demonstration purposes only."
