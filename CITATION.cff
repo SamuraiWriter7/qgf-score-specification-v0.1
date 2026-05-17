@@ -1,0 +1,33 @@
+cff-version: 1.2.0
+message: "If you use or reference this specification, please cite it as below."
+title: "QGF Score Specification v0.1: Question Gravitational Field Score"
+version: "0.1.0"
+date-released: "2026-05-17"
+type: software
+license: MIT
+
+authors:
+  - name: "Shidenkai Alpha"
+
+abstract: >
+  QGF Score Specification v0.1 defines a minimal structural measurement model
+  for estimating the Question Gravitational Field of a question. It provides
+  parameters, field classes, examples, schema validation, and measurement
+  procedures for observing how strongly a question attracts AI responses,
+  trace records, structural fingerprints, lineage relations, and civilizational
+  discourse.
+
+keywords:
+  - qgf
+  - question-gravitational-field
+  - question-gravity
+  - kazene
+  - trace-protocol
+  - structure-fingerprint
+  - lineage
+  - tolerance-band
+  - civilizational-os
+  - ai-civilization
+  - structural-measurement
+
+repository-code: "https://github.com/SamuraiWriter7/qgf-score-specification-v0.1"
