@@ -4,7 +4,7 @@
 
 **QGF Score** is a minimal specification for measuring the structural influence of a question.
 
-It estimates how strongly a question attracts thought, AI responses, structural derivatives, trace records, lineage relations, and civilizational discourse.
+It estimates how strongly a question attracts thought, AI responses, structural derivatives, trace records, structure fingerprints, lineage relations, and civilizational discourse.
 
 In short:
 
@@ -16,10 +16,11 @@ In short:
 ## Status
 
 ```text
-Version: v0.1
+Version: v0.1.0
 Status: Draft
 Scope: Conceptual / Structural Measurement
 Legal status: Non-legal / Non-deterministic
+License: MIT
 ```
 
 This specification does **not** determine legal authorship, copyright ownership, monetary entitlement, or originality by itself.
@@ -41,7 +42,7 @@ A question may generate:
 - repositories
 - GPTs or agent implementations
 - trace records
-- structural fingerprints
+- structure fingerprints
 - lineage relations
 - further questions
 
@@ -135,7 +136,8 @@ High Depth may include:
 - unanswered structural tension
 - capacity to generate further theory
 
-A deep question does not end with one answer.  
+A deep question does not end with one answer.
+
 It opens a field.
 
 ---
@@ -250,7 +252,8 @@ High resonance may include:
 
 When α is greater than 1, the question begins to behave non-linearly.
 
-It does not merely spread.  
+It does not merely spread.
+
 It resonates.
 
 ---
@@ -413,6 +416,12 @@ qgf_score:
     - "This score should not be used as an automatic monetary allocation rule."
 ```
 
+For a calibrated Resonant Field example, see:
+
+```text
+examples/qgf-score.resonant.sample.yml
+```
+
 ---
 
 ## Relationship to Kazene Structures
@@ -471,9 +480,12 @@ qgf-score-specification-v0.1/
 │   └── qgf-score.resonant.sample.yml
 ├── schemas/
 │   └── qgf-score-v0.1.schema.json
-└── .github/
-    └── workflows/
-        └── validate-specs.yml
+├── .github/
+│   └── workflows/
+│       └── validate-specs.yml
+├── LICENSE
+├── CITATION.cff
+└── CHANGELOG.md
 ```
 
 ---
@@ -490,7 +502,9 @@ Start with:
 README.md
 ```
 
-This document explains:
+This is the main specification document for QGF Score v0.1.
+
+It explains:
 
 - the purpose of QGF Score
 - the core formula
@@ -499,6 +513,8 @@ This document explains:
 - field classes
 - minimal QGF object structure
 - relationship to the wider Kazene ecosystem
+- repository structure
+- intended usage and non-goals
 
 QGF Score is not a popularity score, legal proof, ranking system, or automatic reward mechanism.
 
@@ -525,6 +541,8 @@ It defines:
 - calibration
 - tolerance bands
 - field class assignment
+- minimum evidence requirements
+- review status
 - risk controls
 
 This file turns QGF from a conceptual formula into an operational measurement procedure.
@@ -599,6 +617,8 @@ It validates:
 - required fields
 - parameter ranges
 - result fields
+- formula fields
+- calibration fields
 - evidence objects
 - relationships
 - limitations
@@ -640,6 +660,56 @@ It verifies that QGF sample objects remain structurally and mathematically consi
 
 ---
 
+### 7. License
+
+See:
+
+```text
+LICENSE
+```
+
+This repository is released under the MIT License.
+
+The license applies to the specification, documentation, schema, examples, and validation workflow unless otherwise stated.
+
+---
+
+### 8. Citation
+
+See:
+
+```text
+CITATION.cff
+```
+
+This file provides citation metadata for GitHub and reference use.
+
+If you use or reference this specification, cite it as:
+
+```text
+QGF Score Specification v0.1: Question Gravitational Field Score
+```
+
+---
+
+### 9. Changelog
+
+See:
+
+```text
+CHANGELOG.md
+```
+
+This file records version history and notable changes.
+
+Current release:
+
+```text
+v0.1.0 - Initial draft specification
+```
+
+---
+
 ## Recommended Reading Flow
 
 ```text
@@ -656,7 +726,30 @@ examples/qgf-score.resonant.sample.yml
 schemas/qgf-score-v0.1.schema.json
   ↓
 .github/workflows/validate-specs.yml
+  ↓
+LICENSE
+  ↓
+CITATION.cff
+  ↓
+CHANGELOG.md
 ```
+
+---
+
+## Core Files
+
+| Path | Purpose |
+|---|---|
+| `README.md` | Main specification document for QGF Score v0.1. |
+| `docs/qgf-measurement-procedure.md` | Standard procedure for measuring Question Gravitational Field. |
+| `docs/relationship-to-trace-fingerprint-lineage.md` | Explains how QGF connects to Trace, Fingerprint, Lineage, Tolerance Band, Allocation Readiness, and Royalty OS. |
+| `examples/qgf-score.sample.yml` | Minimal QGF Score sample object. |
+| `examples/qgf-score.resonant.sample.yml` | Resonant Field sample using calibration. |
+| `schemas/qgf-score-v0.1.schema.json` | JSON Schema Draft 2020-12 definition for QGF Score objects. |
+| `.github/workflows/validate-specs.yml` | GitHub Actions workflow for validating schema, examples, and formula consistency. |
+| `LICENSE` | MIT License. |
+| `CITATION.cff` | Citation metadata for GitHub and reference use. |
+| `CHANGELOG.md` | Version history and release notes. |
 
 ---
 
@@ -814,28 +907,28 @@ Questions can become civilizational gravity.
 
 ## License
 
-This repository is intended to be released under an open license.
+This repository is released under the MIT License.
 
-Recommended:
-
-```text
-MIT License
-```
-
-or, if the focus is primarily documentation:
+See:
 
 ```text
-Creative Commons Attribution 4.0 International
+LICENSE
 ```
 
 ---
 
 ## Citation
 
-If you refer to this specification, please cite it as:
+If you use or reference this specification, please cite it as:
 
 ```text
 QGF Score Specification v0.1: Question Gravitational Field Score
+```
+
+See:
+
+```text
+CITATION.cff
 ```
 
 ---
@@ -844,4 +937,10 @@ QGF Score Specification v0.1: Question Gravitational Field Score
 
 ```text
 v0.1.0 - Initial draft specification
+```
+
+For details, see:
+
+```text
+CHANGELOG.md
 ```
